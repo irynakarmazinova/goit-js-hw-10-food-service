@@ -8,17 +8,6 @@ import './sass/main.scss';
 const refs = {
   ulMenuRef: document.querySelector('.js-menu'),
   checkboxRef: document.getElementById('theme-switch-toggle'),
-  // ulIngredientsRef: document.querySelector('.tag-list'),
-};
-
-const Theme = {
-  LIGHT: 'light-theme',
-  DARK: 'dark-theme',
-};
-
-const settings = {
-  theme: Theme.DARK,
-  checked: true,
 };
 
 // функция создания карточки меню
@@ -27,39 +16,43 @@ function createMenuCadrs(cards) {
 }
 refs.ulMenuRef.insertAdjacentHTML('beforeend', createMenuCadrs(cards));
 
-// функция добавляет лишки
-// function createLiIngredients() {
-//   return cards.reduce((acc, { ingredients }) => {
-//     acc = `${acc} <li class='tag-list__item'>${ingredients[0]}</li>
-//           <li class='tag-list__item'>${ingredients[1]}</li>
-//           <li class='tag-list__item'>${ingredients[2]}</li>
-//           <li class='tag-list__item'>${ingredients[3]}</li>
-//           <li class='tag-list__item'>${ingredients[4]}</li>
-//           <li class='tag-list__item'>${ingredients[5]}</li>`;
-//     return acc;
-//   }, '');
-// }
-// refs.ulIngredientsRef.insertAdjacentHTML('beforeend', createLiIngredients);
+const Theme = {
+  LIGHT: 'light-theme',
+  DARK: 'dark-theme',
+};
+
+let theme = localStorage.getItem('theme') || Theme.LIGHT;
+document.body.classList.add(theme);
+
+if (theme === Theme.DARK) {
+  refs.checkboxRef.checked = true;
+}
 
 // функция смены темы на светлая/темная
 function menuTheme() {
-  if (!document.body.getAttribute('class') || document.body.classList.contains(Theme.LIGHT)) {
-    document.body.classList.add(Theme.DARK);
-    document.body.classList.remove(Theme.LIGHT);
-  } else {
-    document.body.classList.add(Theme.LIGHT);
-    document.body.classList.remove(Theme.DARK);
-  }
+  // if (!document.body.getAttribute('class') || document.body.classList.contains(Theme.LIGHT)) {
+  //   document.body.classList.add(Theme.DARK);
+  //   document.body.classList.remove(Theme.LIGHT);
+  // } else {
+  //   document.body.classList.add(Theme.LIGHT);
+  //   document.body.classList.remove(Theme.DARK);
+  // }
 
   saveItem();
 }
-refs.checkboxRef.addEventListener('change', menuTheme);
+refs.checkboxRef.addEventListener('change', switchTheme);
+
+function switchTheme() {
+  document.body.classList.toggle(Theme.DARK);
+  document.body.classList.toggle(Theme.LIGHT);
+
+  saveItem();
+}
 
 // функция для localStorage-сохр при перезагрузки стр в localStorage
 function saveItem() {
-  localStorage.setItem('theme', 'light');
-  const savedSettings = JSON.stringify(localStorage.getItem('theme'));
-  console.log(savedSettings);
+  theme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+  localStorage.setItem('theme', theme);
 }
 
 // feature detection js(выявление возможностей браузера) about lazyload
@@ -112,3 +105,4 @@ function addLazySizesScript() {
 // сделать
 // 1. просмотреть еще раз ленивую загрузку
 // 2. разбить джс по файлам, а не все в index.js
+// 3.  удалить стайл.цсс
