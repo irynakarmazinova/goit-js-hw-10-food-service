@@ -18,6 +18,9 @@ export const menu = () => {
   if (themeColor === Theme.DARK) {
     checkboxRef.checked = true;
   }
+  // localStorage.getItem('theme-color') === Theme.LIGHT
+  //   ? (checkboxRef.checked = false)
+  //   : (checkboxRef.checked = true);
 
   // функция создания карточки меню
   function createMenuCadrs(cards) {
