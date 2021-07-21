@@ -49,23 +49,13 @@ export const menu = () => {
     localStorage.setItem('theme-color', themeColor);
   }
 
-  // feature detection js(выявление возможностей браузера) about lazyload
-  if ('loading' in HTMLImageElement.prototype) {
-    console.log('Браузер поддерживает lazyload');
-    addSrcAttrToLazyImages();
-  } else {
-    console.log('Браузер НЕ поддерживает lazyload');
-    addLazySizesScript();
-  }
-
   // функция lazyload с поддержкой нативной и библиотеки
   function addSrcAttrToLazyImages() {
     const lazyImages = document.querySelectorAll('img[loading="lazy"]');
 
     // ленивая загрузка - проверка загружаемости картинок
     lazyImages.forEach(image => image.addEventListener('load', onImageLoaded, { once: true }));
-
-    function onImageLoaded() {
+    function onImageLoaded(e) {
       console.log('Картинка загрузилась');
     }
 
@@ -82,5 +72,14 @@ export const menu = () => {
     script.referrerpolicy = 'no-referrer';
 
     document.body.appendChild(script);
+  }
+
+  // feature detection js(выявление возможностей браузера)
+  if ('loading' in HTMLImageElement.prototype) {
+    console.log('Браузер поддерживает lazyload');
+    addSrcAttrToLazyImages();
+  } else {
+    console.log('Браузер НЕ поддерживает lazyload');
+    addLazySizesScript();
   }
 };
