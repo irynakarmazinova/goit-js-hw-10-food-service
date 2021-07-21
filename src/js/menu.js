@@ -10,25 +10,25 @@ export const menu = () => {
     DARK: 'dark-theme',
   };
 
+  // цвет темы y body либо который записан в локалстор(ищем по ключу), либо по умолчанию светлый
+  let themeColor = localStorage.getItem('theme-color') || Theme.LIGHT;
+  document.body.classList.add(themeColor);
+
+  // если тема темная, при перезагрузки стр поставить ползунок вправо(как выбранный)
+  if (themeColor === Theme.DARK) {
+    checkboxRef.checked = true;
+  }
+
   // функция создания карточки меню
   function createMenuCadrs(cards) {
     return menuCardsTpl(cards);
   }
   ulMenuRef.insertAdjacentHTML('beforeend', createMenuCadrs(cards));
 
-  // установить у боди светлую тему по умолчанию
-  // или можно было в шаблоне добавить <body class="light-theme"> - не работает, почему?
-  let theme = localStorage.getItem('theme') || Theme.LIGHT;
-  document.body.classList.add(theme);
-
-  // если тема темная, при перезагрузки стр поставить ползунок вправо как выбранный
-  if (theme === Theme.DARK) {
-    checkboxRef.checked = true;
-  }
-
   // функция смены темы на светлая/темная
   function toggleTheme() {
     // if (!document.body.getAttribute('class') || document.body.classList.contains(Theme.LIGHT)) {
+    // if (document.body.classList.contains(Theme.LIGHT)) {
     //   document.body.classList.add(Theme.DARK);
     //   document.body.classList.remove(Theme.LIGHT);
     // } else {
@@ -39,14 +39,14 @@ export const menu = () => {
     document.body.classList.toggle(Theme.DARK);
     document.body.classList.toggle(Theme.LIGHT);
 
-    saveItem();
+    savethemeColor();
   }
   checkboxRef.addEventListener('change', toggleTheme);
 
   // функция для localStorage-сохр при перезагрузки стр в localStorage
-  function saveItem() {
-    theme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
-    localStorage.setItem('theme', theme);
+  function savethemeColor() {
+    themeColor = themeColor === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+    localStorage.setItem('theme-color', themeColor);
   }
 
   // feature detection js(выявление возможностей браузера) about lazyload
