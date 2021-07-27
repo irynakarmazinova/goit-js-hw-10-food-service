@@ -94,41 +94,38 @@ if ('loading' in HTMLImageElement.prototype) {
 
 // // самовызывающаяся функция
 // // (function () {
-// const listRef = document.querySelector('.js-menu');
-// const switchRef = document.querySelector('#theme-switch-toggle');
-// const bodyRef = document.querySelector('body');
+//  const listRef = document.querySelector('.js-menu');
+//  const switchRef = document.querySelector('#theme-switch-toggle');
+//  const bodyRef = document.querySelector('body');
 
-// const { LIGHT, DARK } = {
-//   LIGHT: 'light-theme',
-//   DARK: 'dark-theme',
-// };
+//  const { LIGHT, DARK } = {
+//    LIGHT: 'light-theme',
+//    DARK: 'dark-theme',
+//  };
 
-// let state = JSON.parse(localStorage.getItem('theme'));
+//  //   let state = JSON.parse(localStorage.getItem('theme'));
+//  let theme = localStorage.getItem('theme');
 
-// bodyRef.classList.add(state?.theme ? state.theme : LIGHT);
-// switchRef.checked = state?.checked;
+//  bodyRef.classList.add(theme ? theme : LIGHT);
+//  switchRef.checked = theme === DARK;
 
-// listRef.insertAdjacentHTML('beforeend', createMenu(menu));
+//  listRef.insertAdjacentHTML('beforeend', createMenu(menu));
 
-// const changeTheme = ({ target: { checked } }) =>
-//   checked ? toggleTheme(DARK, LIGHT) : toggleTheme(LIGHT, DARK);
+//  const changeTheme = ({ target: { checked } }) =>
+//    checked ? toggleTheme(DARK, LIGHT) : toggleTheme(LIGHT, DARK);
 
-// switchRef.addEventListener('change', changeTheme);
+//  switchRef.addEventListener('change', changeTheme);
 
-// function toggleTheme(add, rem) {
-//   bodyRef.classList.replace(rem, add);
-//   const state = {
-//     theme: add,
-//     checked: add === DARK,
-//   };
-//   localStorage.setItem('theme', JSON.stringify(state));
-// }
+//  function toggleTheme(add, rem) {
+//    bodyRef.classList.replace(rem, add);
+//    // const state = {
+//    //   theme: add,
+//    //   checked: add === DARK,
+//    // };
+//    // localStorage.setItem('theme', JSON.stringify(state));
 
-// // функция для localStorage-сохр при перезагрузки стр в localStorage
-// function savethemeColor() {
-//   themeColor = themeColor === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
-//   localStorage.setItem('theme-color', themeColor);
-// }
+//    localStorage.setItem('theme', add);
+//  }
 
 // // функция lazyload с поддержкой нативной и библиотеки
 // function addSrcAttrToLazyImages() {
