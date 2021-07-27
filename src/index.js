@@ -1,4 +1,5 @@
-import { menu } from './js/menu';
-import './sass/main.scss';
+// import { menu } from './js/menu';
+// menu();
 
-menu();
+import './js/menu';
+import './sass/main.scss';
